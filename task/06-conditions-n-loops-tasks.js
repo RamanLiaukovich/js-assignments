@@ -27,10 +27,18 @@
  *  15 => 'FizzBuzz'
  *  20 => 'Buzz'
  *  21 => 'Fizz'
- *
+ *return
  */
 function getFizzBuzz(num) {
-    throw new Error('Not implemented');
+    if (num % 3 === 0 && num % 5 === 0) {
+        return 'FizzBuzz';
+    } else if (num % 3 === 0) {
+        return 'Fizz';
+    } else if (num % 5 === 0) {
+        return 'Buzz';
+    } else {
+        return num;
+    }
 }
 
 
@@ -46,7 +54,7 @@ function getFizzBuzz(num) {
  *   10 => 3628800
  */
 function getFactorial(n) {
-    throw new Error('Not implemented');
+    return n === 1 ? 1 : n *= getFactorial(n - 1);
 }
 
 
@@ -63,7 +71,7 @@ function getFactorial(n) {
  *   -1,1  =>  0  ( = -1 + 0 + 1 )
  */
 function getSumBetweenNumbers(n1, n2) {
-    throw new Error('Not implemented');
+    return n2 === n1 ? n1 : n2 += getSumBetweenNumbers(n1, n2 - 1);
 }
 
 
@@ -82,7 +90,10 @@ function getSumBetweenNumbers(n1, n2) {
  *   10,10,10 =>  true
  */
 function isTriangle(a,b,c) {
-    throw new Error('Not implemented');
+    if ((a + b) > c && (b + c) > a && (a + c) > b) {
+        return true;
+    }
+    return false;
 }
 
 
@@ -119,7 +130,7 @@ function isTriangle(a,b,c) {
  *  
  */
 function doRectanglesOverlap(rect1, rect2) {
-    throw new Error('Not implemented');
+    //return (rect1.top < rect2.top || rect1.left)
 }
 
 
@@ -150,9 +161,9 @@ function doRectanglesOverlap(rect1, rect2) {
  *   
  */
 function isInsideCircle(circle, point) {
-    throw new Error('Not implemented');
+    const pointToRadius = Math.sqrt(Math.pow((circle.center.x - point.x), 2) + Math.pow((circle.center.y - point.y), 2));
+    return pointToRadius < circle.radius;
 }
-
 
 /**
  * Returns the first non repeated char in the specified strings otherwise returns null.
@@ -166,7 +177,24 @@ function isInsideCircle(circle, point) {
  *   'entente' => null
  */
 function findFirstSingleChar(str) {
-    throw new Error('Not implemented');
+    // const arr = str.split('');
+    // let stack = [];
+    // arr.forEach(element => {
+    //     if (stack.includes(element)) {
+    //         const idx = stack.indexOf(element);
+    //         stack.splice(idx, 1);
+    //     } else {
+    //         stack.push(element);
+    //     }
+    // });
+    // return stack[0];
+    for(let i = 0; i < str.length; i++) {
+        const newStr = str.replace(str[i]);
+        if (!newStr.includes(str[i])) {
+            return str[i];
+        }
+    }
+    return null;
 }
 
 
