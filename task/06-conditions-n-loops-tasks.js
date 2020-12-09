@@ -177,17 +177,6 @@ function isInsideCircle(circle, point) {
  *   'entente' => null
  */
 function findFirstSingleChar(str) {
-    // const arr = str.split('');
-    // let stack = [];
-    // arr.forEach(element => {
-    //     if (stack.includes(element)) {
-    //         const idx = stack.indexOf(element);
-    //         stack.splice(idx, 1);
-    //     } else {
-    //         stack.push(element);
-    //     }
-    // });
-    // return stack[0];
     for(let i = 0; i < str.length; i++) {
         const newStr = str.replace(str[i]);
         if (!newStr.includes(str[i])) {
@@ -220,7 +209,10 @@ function findFirstSingleChar(str) {
  *
  */
 function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
-    throw new Error('Not implemented');
+    let str = isStartIncluded ? '[' : '(';
+    str += (a < b) ? `${a}, ${b}`: `${b}, ${a}`;
+    str += isEndIncluded ? ']' : ')';
+    return str;
 }
 
 
@@ -237,7 +229,7 @@ function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
  * 'noon' => 'noon'
  */
 function reverseString(str) {
-    throw new Error('Not implemented');
+    return str.split('').reverse().join('');
 }
 
 
@@ -254,7 +246,8 @@ function reverseString(str) {
  *   34143 => 34143
  */
 function reverseInteger(num) {
-    throw new Error('Not implemented');
+    let str = num.toString().split('').reverse().join('');
+    return Number(str);
 }
 
 
@@ -298,7 +291,12 @@ function isCreditCardNumber(ccn) {
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
 function getDigitalRoot(num) {
-    throw new Error('Not implemented');
+    // let counter = num;
+    // let arr = counter.toString().split('');
+    // while (counter > 9) {
+    //     counter = arr.reduce((a, b) => Number(a) + Number(b));
+    // }
+    // return counter;
 }
 
 
@@ -459,7 +457,34 @@ function getMatrixProduct(m1, m2) {
  *
  */
 function evaluateTicTacToePosition(position) {
-    throw new Error('Not implemented');
+    let result = undefined;
+    position.forEach((item) => {
+        if (item.join('').match(/\d{3}|\X{3}/)) {
+            result = item[0];
+        }
+    })
+    
+    if (result === undefined) {
+        for (let i = 0; i < position.length; i++) {
+            const elem = position[0][i];
+            const verticalCond = elem === position[1][i]
+                                 && elem === position[2][i];
+            const diagCond1 = elem === position[1][i+1]
+                              && elem === position[2][i+2];
+            const diagCond2 = elem === position[1][i-1]
+                              && elem === position[2][i-2];
+
+
+            if (verticalCond) {
+                result = elem;
+            } else if (i === 0 && diagCond1) {
+                result = elem;
+            } else if (i === 2 && diagCond2) {
+                result = elem;
+            }
+        }
+    }
+    return result;
 }
 
 
